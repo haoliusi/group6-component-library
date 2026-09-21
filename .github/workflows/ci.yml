@@ -18,5 +18,5 @@ jobs:
       - run: npm run verify
       - run: npm run build-storybook
         env:
-          STORYBOOK_BASE_PATH: /rn-component-library-demo/
+          STORYBOOK_BASE_PATH: /group6-component-library/
       - run: npm pack --dry-run
