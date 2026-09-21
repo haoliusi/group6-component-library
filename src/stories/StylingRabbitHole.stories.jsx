@@ -1,0 +1,103 @@
+import { StyleSheet, Text, View } from 'react-native';
+
+function AnythingGoesPanel({
+  title,
+  message,
+  accentColor = '#3157D5',
+  containerStyle,
+  titleStyle,
+  messageStyle,
+}) {
+  return (
+    <View
+      style={[
+        styles.panel,
+        { borderColor: accentColor },
+        containerStyle,
+      ]}
+    >
+      <Text style={[styles.title, titleStyle]}>{title}</Text>
+      <Text style={[styles.message, messageStyle]}>{message}</Text>
+    </View>
+  );
+}
+
+const meta = {
+  title: 'Teaching example/Styling rabbit hole (not exported)',
+  component: AnythingGoesPanel,
+  tags: ['autodocs'],
+
+  // Set the default props for this teaching example.
+  args: {
+    title: 'Everything is configurable',
+    message:
+      'That sounds flexible, but every screen can now quietly invent a different design.',
+    accentColor: '#D14D72',
+  },
+
+  // Explain the purpose of this anti-example in the generated documentation.
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'This Storybook-only anti-example is intentionally absent from src/index.js. Compare its open-ended styling API with StatusCard’s semantic status prop.',
+      },
+    },
+  },
+
+  // Configure the controls used to change the component's styling props.
+  argTypes: {
+    accentColor: {
+      control: 'color',
+    },
+    containerStyle: {
+      control: 'object',
+    },
+    titleStyle: {
+      control: 'object',
+    },
+    messageStyle: {
+      control: 'object',
+    },
+  },
+};
+
+export default meta;
+
+// Demonstrate how many unrelated visual choices the API allows.
+export const TooManyEscapeHatches = {
+  args: {
+    containerStyle: {
+      borderRadius: 32,
+      borderWidth: 5,
+      padding: 28,
+    },
+    titleStyle: {
+      fontSize: 26,
+      fontStyle: 'italic',
+    },
+    messageStyle: {
+      color: '#7A284E',
+    },
+  },
+};
+
+const styles = StyleSheet.create({
+  panel: {
+    backgroundColor: 'white',
+    borderWidth: 3,
+    maxWidth: 440,
+    padding: 16,
+  },
+  title: {
+    color: '#172033',
+    fontSize: 20,
+    fontWeight: '700',
+    marginBottom: 8,
+  },
+  message: {
+    color: '#526078',
+    fontSize: 16,
+    lineHeight: 23,
+  },
+});
