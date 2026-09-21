@@ -1,6 +1,6 @@
 {
   "name": "group6-component-library",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "description": "A small JavaScript React Native design-system package with browser-based Storybook documentation.",
@@ -27,7 +27,7 @@
     "type": "git",
     "url": "git+https://github.com/haoliusi/group6-component-library.git"
   },
-  "homepage": "https://haoliusi/group6-component-library.github.io/",
+  "homepage": "https://haoliusi.github.io/group6-component-library/",
   "engines": {
     "node": ">=22.13.0"
   },

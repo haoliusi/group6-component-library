@@ -10,9 +10,9 @@
   "include": [
     "src/index.js",
     "src/tokens.js",
-    "src/components/ChoiceChips.jsx",
-    "src/components/DemoButton.jsx",
-    "src/components/StatusCard.jsx"
+    "src/components/AppHeader.jsx",
+    "src/components/ListItem.jsx",
+    "src/components/TextField.jsx"
   ],
   "exclude": ["src/**/*.stories.jsx", "src/__tests__", "node_modules"]
 }

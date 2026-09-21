@@ -1,6 +1,4 @@
-import { Canvas, Meta } from '@storybook/addon-docs/blocks';
-import * as ButtonStories from '../src/components/DemoButton.stories.jsx';
-import * as ChoiceStories from '../src/components/ChoiceChips.stories.jsx';
+import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Start here/From design to dependency" />
 
@@ -10,18 +8,10 @@ These examples are not pictures of components. They are the components.
 Storybook renders the React Native source through `react-native-web`, while an
 Expo application installs the built package from GitHub.
 
-<Canvas of={ButtonStories.Primary} />
-
-Change the controls and watch the real component respond. Its allowed variants
-come from the library API, and its measurements and colors come from shared
-design tokens.
-
-## A parent can own the state
-
-`ChoiceChips` reports a new value, then its parent decides what to render. The
-story below acts as that parent, just as an application screen would.
-
-<Canvas of={ChoiceStories.Controlled} />
+Browse `AppHeader`, `ListItem`, and `TextField` under **Components** in the
+sidebar. Change the controls and watch the real component respond. Its
+allowed variants come from the library API, and its measurements and colors
+come from shared design tokens.
 
 ## Follow the boundary
 

@@ -20,14 +20,14 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.js
 var index_exports = {};
 __export(index_exports, {
-  ChoiceChips: () => ChoiceChips,
-  DemoButton: () => DemoButton,
-  StatusCard: () => StatusCard,
+  AppHeader: () => AppHeader,
+  ListItem: () => ListItem,
+  TextField: () => TextField,
   tokens: () => tokens
 });
 module.exports = __toCommonJS(index_exports);
 
-// src/components/ChoiceChips.jsx
+// src/components/AppHeader.jsx
 var import_react_native = require("react-native");
 
 // src/tokens.js
@@ -64,214 +64,281 @@ var tokens = {
   }
 };
 
-// src/components/ChoiceChips.jsx
+// src/components/AppHeader.jsx
 var import_jsx_runtime = require("react/jsx-runtime");
-function ChoiceChips({ label, options, value, onChange }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_react_native.View, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.Text, { style: styles.label, children: label }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.View, { style: styles.row, children: options.map((option) => {
-      const selected = option.value === value;
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+function AppHeader({
+  title,
+  subtitle,
+  size = "large",
+  onBack,
+  actionLabel,
+  onAction,
+  testID
+}) {
+  const isLarge = size === "large";
+  return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_react_native.View, { style: styles.header, testID, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_react_native.View, { style: styles.topRow, children: [
+      onBack ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
         import_react_native.Pressable,
         {
-          accessibilityLabel: option.label,
-          accessibilityRole: "radio",
-          accessibilityState: { checked: selected },
-          onPress: () => onChange(option.value),
-          style: ({ pressed }) => [
-            styles.chip,
-            selected ? styles.selectedChip : void 0,
-            pressed ? styles.pressedChip : void 0
-          ],
-          children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.Text, { style: [styles.chipLabel, selected ? styles.selectedLabel : void 0], children: option.label })
-        },
-        option.value
-      );
-    }) })
+          accessibilityRole: "button",
+          accessibilityLabel: "Go back",
+          hitSlop: 8,
+          onPress: onBack,
+          style: ({ pressed }) => [styles.back, pressed ? styles.pressed : void 0],
+          children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.Text, { style: styles.backText, children: "\u2039 Back" })
+        }
+      ) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.View, {}),
+      !isLarge ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.Text, { accessibilityRole: "header", numberOfLines: 1, style: styles.compactTitle, children: title }) : null,
+      actionLabel && onAction ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+        import_react_native.Pressable,
+        {
+          accessibilityRole: "button",
+          hitSlop: 8,
+          onPress: onAction,
+          style: ({ pressed }) => pressed ? styles.pressed : void 0,
+          children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.Text, { style: styles.actionText, children: actionLabel })
+        }
+      ) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.View, {})
+    ] }),
+    isLarge ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_react_native.View, { style: styles.largeBlock, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.Text, { accessibilityRole: "header", style: styles.largeTitle, children: title }),
+      subtitle ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.Text, { style: styles.subtitle, children: subtitle }) : null
+    ] }) : null
   ] });
 }
 var styles = import_react_native.StyleSheet.create({
-  label: {
-    color: tokens.color.ink,
-    fontSize: 16,
-    fontWeight: "700",
-    marginBottom: tokens.spacing.sm
-  },
-  row: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: tokens.spacing.sm
-  },
-  chip: {
+  header: {
     backgroundColor: tokens.color.surface,
-    borderColor: tokens.color.border,
-    borderRadius: tokens.radius.pill,
-    borderWidth: 2,
+    borderBottomColor: tokens.color.border,
+    borderBottomWidth: import_react_native.StyleSheet.hairlineWidth,
+    paddingBottom: tokens.spacing.md,
     paddingHorizontal: tokens.spacing.lg,
-    paddingVertical: tokens.spacing.sm
+    paddingTop: tokens.spacing.md
   },
-  selectedChip: {
-    backgroundColor: tokens.color.brandSoft,
-    borderColor: tokens.color.brand
+  topRow: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    minHeight: 32
   },
-  pressedChip: {
-    opacity: 0.72
+  back: {
+    paddingVertical: tokens.spacing.xs
   },
-  chipLabel: {
-    color: tokens.color.mutedInk,
-    fontSize: 15,
+  backText: {
+    color: tokens.color.brand,
+    fontSize: 16,
     fontWeight: "600"
   },
-  selectedLabel: {
-    color: tokens.color.brand
+  compactTitle: {
+    color: tokens.color.ink,
+    flex: 1,
+    fontSize: 17,
+    fontWeight: "700",
+    marginHorizontal: tokens.spacing.sm,
+    textAlign: "center"
+  },
+  actionText: {
+    color: tokens.color.brand,
+    fontSize: 16,
+    fontWeight: "600"
+  },
+  largeBlock: {
+    gap: tokens.spacing.xs,
+    marginTop: tokens.spacing.sm
+  },
+  largeTitle: {
+    color: tokens.color.ink,
+    fontSize: 30,
+    fontWeight: "800"
+  },
+  subtitle: {
+    color: tokens.color.mutedInk,
+    fontSize: 15
+  },
+  pressed: {
+    opacity: 0.6
   }
 });
 
-// src/components/DemoButton.jsx
+// src/components/ListItem.jsx
 var import_react_native2 = require("react-native");
 var import_jsx_runtime2 = require("react/jsx-runtime");
-function DemoButton({
-  label,
+function ListItem({
+  title,
+  subtitle,
+  leadingText,
+  trailing = "chevron",
+  badgeText,
   onPress,
-  variant = "primary",
-  disabled = false,
   testID
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+  const initials = (leadingText ?? title ?? "").slice(0, 2).toUpperCase();
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
     import_react_native2.Pressable,
     {
-      accessibilityRole: "button",
-      accessibilityState: { disabled },
-      disabled,
+      accessibilityRole: onPress ? "button" : void 0,
+      accessibilityLabel: subtitle ? `${title}, ${subtitle}` : title,
+      disabled: !onPress,
       onPress,
       testID,
       style: ({ pressed }) => [
-        styles2.button,
-        variant === "primary" ? styles2.primary : styles2.secondary,
-        pressed && !disabled ? styles2.pressed : void 0,
-        disabled ? styles2.disabled : void 0
-      ],
-      children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-        import_react_native2.Text,
-        {
-          style: variant === "primary" ? styles2.primaryLabel : styles2.secondaryLabel,
-          children: label
-        }
-      )
-    }
-  );
-}
-var styles2 = import_react_native2.StyleSheet.create({
-  button: {
-    alignItems: "center",
-    borderRadius: tokens.radius.md,
-    borderWidth: 2,
-    justifyContent: "center",
-    minHeight: 48,
-    paddingHorizontal: tokens.spacing.xl,
-    paddingVertical: tokens.spacing.md
-  },
-  primary: {
-    backgroundColor: tokens.color.brand,
-    borderColor: tokens.color.brand
-  },
-  secondary: {
-    backgroundColor: tokens.color.surface,
-    borderColor: tokens.color.brand
-  },
-  pressed: {
-    opacity: 0.78
-  },
-  disabled: {
-    opacity: 0.45
-  },
-  primaryLabel: {
-    color: tokens.color.white,
-    fontSize: 16,
-    fontWeight: "700"
-  },
-  secondaryLabel: {
-    color: tokens.color.brand,
-    fontSize: 16,
-    fontWeight: "700"
-  }
-});
-
-// src/components/StatusCard.jsx
-var import_react_native3 = require("react-native");
-var import_jsx_runtime3 = require("react/jsx-runtime");
-var appearances = {
-  info: {
-    label: "Info",
-    backgroundColor: tokens.color.infoSoft,
-    borderColor: tokens.color.info,
-    ink: tokens.color.info
-  },
-  success: {
-    label: "Success",
-    backgroundColor: tokens.color.successSoft,
-    borderColor: tokens.color.success,
-    ink: tokens.color.success
-  },
-  warning: {
-    label: "Attention",
-    backgroundColor: tokens.color.warningSoft,
-    borderColor: tokens.color.warning,
-    ink: tokens.color.warning
-  }
-};
-function StatusCard({ title, message, status = "info" }) {
-  const appearance = appearances[status];
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
-    import_react_native3.View,
-    {
-      accessibilityLabel: `${appearance.label}: ${title}. ${message}`,
-      style: [
-        styles3.card,
-        {
-          backgroundColor: appearance.backgroundColor,
-          borderLeftColor: appearance.borderColor
-        }
+        styles2.row,
+        pressed && onPress ? styles2.pressed : void 0
       ],
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_native3.Text, { style: [styles3.eyebrow, { color: appearance.ink }], children: appearance.label }),
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_native3.Text, { style: styles3.title, children: title }),
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_native3.Text, { style: styles3.message, children: message })
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react_native2.View, { style: styles2.avatar, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react_native2.Text, { style: styles2.avatarText, children: initials }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_react_native2.View, { style: styles2.body, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react_native2.Text, { numberOfLines: 1, style: styles2.title, children: title }),
+          subtitle ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react_native2.Text, { numberOfLines: 1, style: styles2.subtitle, children: subtitle }) : null
+        ] }),
+        trailing === "badge" && badgeText ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react_native2.View, { style: styles2.badge, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react_native2.Text, { style: styles2.badgeText, children: badgeText }) }) : null,
+        trailing === "chevron" ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react_native2.Text, { style: styles2.chevron, children: "\u203A" }) : null
       ]
     }
   );
 }
-var styles3 = import_react_native3.StyleSheet.create({
-  card: {
-    borderLeftWidth: 6,
-    borderRadius: tokens.radius.md,
-    maxWidth: 440,
-    padding: tokens.spacing.lg
+var styles2 = import_react_native2.StyleSheet.create({
+  row: {
+    alignItems: "center",
+    backgroundColor: tokens.color.surface,
+    borderBottomColor: tokens.color.border,
+    borderBottomWidth: import_react_native2.StyleSheet.hairlineWidth,
+    flexDirection: "row",
+    gap: tokens.spacing.md,
+    minHeight: 64,
+    paddingHorizontal: tokens.spacing.lg,
+    paddingVertical: tokens.spacing.md
   },
-  eyebrow: {
-    fontSize: 12,
-    fontWeight: "800",
-    letterSpacing: 0.8,
-    marginBottom: tokens.spacing.xs,
-    textTransform: "uppercase"
+  pressed: {
+    backgroundColor: tokens.color.canvas
+  },
+  avatar: {
+    alignItems: "center",
+    backgroundColor: tokens.color.brandSoft,
+    borderRadius: tokens.radius.pill,
+    height: 40,
+    justifyContent: "center",
+    width: 40
+  },
+  avatarText: {
+    color: tokens.color.brand,
+    fontSize: 14,
+    fontWeight: "700"
+  },
+  body: {
+    flex: 1,
+    gap: 2
   },
   title: {
     color: tokens.color.ink,
-    fontSize: 20,
-    fontWeight: "700",
-    marginBottom: tokens.spacing.xs
-  },
-  message: {
-    color: tokens.color.mutedInk,
     fontSize: 16,
-    lineHeight: 23
+    fontWeight: "600"
+  },
+  subtitle: {
+    color: tokens.color.mutedInk,
+    fontSize: 14
+  },
+  badge: {
+    backgroundColor: tokens.color.brand,
+    borderRadius: tokens.radius.pill,
+    minWidth: 24,
+    paddingHorizontal: tokens.spacing.sm,
+    paddingVertical: 2
+  },
+  badgeText: {
+    color: tokens.color.white,
+    fontSize: 12,
+    fontWeight: "700",
+    textAlign: "center"
+  },
+  chevron: {
+    color: tokens.color.mutedInk,
+    fontSize: 24
+  }
+});
+
+// src/components/TextField.jsx
+var import_react_native3 = require("react-native");
+var import_jsx_runtime3 = require("react/jsx-runtime");
+function TextField({
+  label,
+  value,
+  onChangeText,
+  placeholder,
+  helperText,
+  errorText,
+  disabled = false,
+  secureTextEntry = false,
+  testID
+}) {
+  const hasError = Boolean(errorText);
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(import_react_native3.View, { style: styles3.wrapper, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_native3.Text, { style: styles3.label, children: label }),
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+      import_react_native3.TextInput,
+      {
+        accessibilityLabel: label,
+        accessibilityState: { disabled },
+        editable: !disabled,
+        onChangeText,
+        placeholder,
+        placeholderTextColor: tokens.color.mutedInk,
+        secureTextEntry,
+        testID,
+        value,
+        style: [
+          styles3.input,
+          hasError ? styles3.inputError : void 0,
+          disabled ? styles3.inputDisabled : void 0
+        ]
+      }
+    ),
+    hasError ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_native3.Text, { style: styles3.errorText, children: errorText }) : helperText ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_native3.Text, { style: styles3.helperText, children: helperText }) : null
+  ] });
+}
+var styles3 = import_react_native3.StyleSheet.create({
+  wrapper: {
+    gap: tokens.spacing.xs,
+    width: "100%"
+  },
+  label: {
+    color: tokens.color.ink,
+    fontSize: 14,
+    fontWeight: "600"
+  },
+  input: {
+    backgroundColor: tokens.color.surface,
+    borderColor: tokens.color.border,
+    borderRadius: tokens.radius.sm,
+    borderWidth: 1.5,
+    color: tokens.color.ink,
+    fontSize: 16,
+    minHeight: 48,
+    paddingHorizontal: tokens.spacing.md
+  },
+  inputError: {
+    borderColor: tokens.color.warning
+  },
+  inputDisabled: {
+    backgroundColor: tokens.color.canvas,
+    opacity: 0.6
+  },
+  helperText: {
+    color: tokens.color.mutedInk,
+    fontSize: 13
+  },
+  errorText: {
+    color: tokens.color.warning,
+    fontSize: 13,
+    fontWeight: "600"
   }
 });
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  ChoiceChips,
-  DemoButton,
-  StatusCard,
+  AppHeader,
+  ListItem,
+  TextField,
   tokens
 });
 //# sourceMappingURL=index.cjs.map

@@ -1,5 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+/**
+ * @param {object} props
+ * @param {string} props.title
+ * @param {string} props.message
+ * @param {string} [props.accentColor]
+ * @param {object} [props.containerStyle]
+ * @param {object} [props.titleStyle]
+ * @param {object} [props.messageStyle]
+ */
 function AnythingGoesPanel({
   title,
   message,
@@ -40,7 +49,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'This Storybook-only anti-example is intentionally absent from src/index.js. Compare its open-ended styling API with StatusCard’s semantic status prop.',
+          'This Storybook-only anti-example is intentionally absent from src/index.js. Compare its open-ended styling API with TextField’s semantic errorText prop.',
       },
     },
   },
