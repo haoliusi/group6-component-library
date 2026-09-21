@@ -25,9 +25,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UMSI669/rn-component-library-demo.git"
+    "url": "git+https://github.com/haoliusi/group6-component-library.git"
   },
-  "homepage": "https://UMSI669.github.io/rn-component-library-demo/",
+  "homepage": "https://haoliusi/group6-component-library.github.io/",
   "engines": {
     "node": ">=22.13.0"
   },
