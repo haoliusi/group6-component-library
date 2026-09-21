@@ -35,7 +35,7 @@ npm pack --dry-run
 ## Install from GitHub
 
 ```sh
-npm install github:haoliusi/group6-component-library#v2.0.0
+npm install github:haoliusi/group6-component-library#v2.0.1
 ```
 
 ```tsx
